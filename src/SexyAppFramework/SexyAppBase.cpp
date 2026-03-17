@@ -144,6 +144,17 @@ SexyAppBase::SexyAppBase()
 	}
 #elif defined(__EMSCRIPTEN__)
 	mResourceDir = "/";
+#elif defined(__APPLE__)
+	char* aBasePath = SDL_GetPrefPath("io.github.wszqkzqk", "PvZPortable");
+	if (aBasePath)
+	{
+		mResourceDir = aBasePath;
+		SDL_free(aBasePath);
+	}
+	else
+	{
+		mResourceDir = "";
+	}
 #else
 	char* aBasePath = SDL_GetBasePath();
 	if (aBasePath)
